@@ -1,3 +1,8 @@
+function jsio() {
+	//this function is called when the runtime starts excecuting javascript
+	
+}
+
 var EVENT_HANDLER = {},
 	TICK_CALLBACK
 
@@ -6,7 +11,7 @@ GLOBAL.requestAnimationFrame = function( f ) {
 }
 
 GLOBAL.open = GLOBAL.open || GLOBAL.setLocation
-GLOBAL.console = jsio( 'import base', {} ).logging.get( 'console' )
+GLOBAL.console = NATIVE.console
 
 // this function hides the splash screen (has nothing to do with resource loading)
 NATIVE.doneLoading();

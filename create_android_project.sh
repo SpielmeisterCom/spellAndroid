@@ -1,9 +1,11 @@
 #!/bin/sh
 ARCH=linux-ia32
 MODE=RELEASE
+DEBUGGABLE=false
 
 if [ "$1" = "debug" ]; then
         MODE=DEBUG
+	DEBUGGABLE=true
 fi
 
 
@@ -25,6 +27,9 @@ NAMESPACE=com.spielmeister
 ACTIVITY=xyz
 NAME=test
 
+#icon title
+TITLE="TEST title"
+
 rm -Rf $DIR
 android create project --target $TARGET --name $NAME --path $DIR --activity $ACTIVITY --package $NAMESPACE
 android update project --target $TARGET --path $DIR --library ../modules/native-android/TeaLeaf
@@ -32,10 +37,10 @@ android update project --target $TARGET --path $DIR --library ../modules/native-
 # use default manifest file
 xsltproc \
 	--stringparam package "$NAMESPACE" \
-	--stringparam title "" \
-	--stringparam activity "" \
+	--stringparam title "$TITLE" \
+	--stringparam activity ."$ACTIVITY" \
 	--stringparam version "" \
-	--stringparam versionCode "" \
+	--stringparam versionCode "0" \
 	--stringparam gameHash "0.0" \
 	--stringparam sdkHash "1.0" \
 	--stringparam androidHash "1.0" \
@@ -51,10 +56,10 @@ xsltproc \
 	--stringparam pushUrl "http://127.0.0.1/push/%s/?device=%s&amp;version=%s" \
 	--stringparam servicesUrl "http://127.0.0.1" \
 	--stringparam disableLogs "true" \
-	--stringparam debuggable "false" \
+	--stringparam debuggable "$DEBUGGABLE" \
 	--stringparam installShortcut "false" \
 	--stringparam contactsUrl "" \
-	--stringparam orientation "" \
+	--stringparam orientation "portrait" \
 	modules/native-android/AndroidManifest.xsl \
 	$TEALEAF_DIR/AndroidManifest.xml \
 	>$DIR/AndroidManifest.xml
@@ -64,6 +69,10 @@ JAVA_MAIN=$DIR/src/$(echo $NAMESPACE | tr "." "/")/$ACTIVITY.java
 $SED 's/extends Activity/extends com.tealeaf.TeaLeaf/g' $JAVA_MAIN 
 $SED 's/setContentView(R.layout.main);/startGame();/g' $JAVA_MAIN
 
+# copy engine & asset files
+mkdir -p $DIR/assets/resources
+cp launchClient.js $DIR/assets/resources/native.js.mp3
+
 cd $DIR
 
 if [ "$MODE" = "RELEASE" ]; then
@@ -72,6 +81,7 @@ if [ "$MODE" = "RELEASE" ]; then
 	jarsigner -sigalg MD5withRSA -digestalg SHA1 \
 -keystore $KEYSTORE -storepass $STOREPASS -keypass $KEYPASS \
 -signedjar ./bin/$NAME-unaligned.apk ./bin/$NAME-release-unsigned.apk $KEY
+
 else
 	ant debug
 
