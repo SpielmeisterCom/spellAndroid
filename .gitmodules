@@ -7,3 +7,6 @@
 [submodule "modules/android-sdk"]
 	path = modules/android-sdk
 	url = ssh://git@stash.spielmeister.com:7999/SPELLANDROID/android-sdk.git
+[submodule "modules/jdk"]
+	path = modules/jdk
+	url = ssh://git@stash.spielmeister.com:7999/SPELLJSCOMMON/jdk.git
