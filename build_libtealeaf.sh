@@ -1,7 +1,17 @@
 #!/bin/sh
 
 MODE=RELEASE
-ARCH=linux-ia32
+UNAME=$(uname -sm)
+
+if [ "$UNAME" = "Linux i386" ]; then
+	ARCH="linux-ia32"
+
+elif [ "$UNAME" = "Linux x86_64" ]; then
+	ARCH="linux-ia32"
+
+elif [ "$UNAME" = "Darwin x86_64" ]; then
+	ARCH="osx-x64"
+fi
 
 if [ "$1" = "debug" ]; then
 	MODE=DEBUG

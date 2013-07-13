@@ -9,11 +9,21 @@ if [ "$1" = "debug" ]; then
 fi
 
 
-#ifeq ($(UNAME_S),Darwin)
-#        SED = sed -i "" -e
-#else
+UNAME=$(uname -sm)
 
-SED="sed -i"
+if [ "$UNAME" = "Linux i386" ]; then
+        ARCH="linux-ia32"
+	SED="sed -i"
+
+elif [ "$UNAME" = "Linux x86_64" ]; then
+        ARCH="linux-ia32"
+	SED="sed -i"
+
+elif [ "$UNAME" = "Darwin x86_64" ]; then
+        ARCH="osx-x64"
+        SED="sed -i \"\" -e"
+fi
+
 
 #path to javac
 export JAVA_HOME=$PWD/modules/jdk/$ARCH
@@ -87,7 +97,9 @@ else
 
 	adb uninstall $NAMESPACE
 	adb install -r ./bin/$NAME-debug.apk
-	adb shell am start -n $NAMESPACE/$ACTIVITY 
+	adb shell am start -n $NAMESPACE/.$ACTIVITY 
+	
+	adb logcat
 fi
 
 
