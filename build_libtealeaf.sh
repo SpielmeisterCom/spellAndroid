@@ -22,6 +22,7 @@ export JAVA_HOME=$PWD/modules/jdk/$ARCH
 export PATH=$PATH:$PWD/modules/android-sdk/$ARCH/platform-tools:$PWD/modules/android-sdk/$ARCH/tools:$PWD/modules/android-ndk/$ARCH
 
 #symlink our own native-core repository
+rm modules/native-android/TeaLeaf/jni/core
 ln -sf ../../../native-core modules/native-android/TeaLeaf/jni/core
 
 cd modules/native-android
