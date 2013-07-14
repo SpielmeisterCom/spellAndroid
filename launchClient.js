@@ -648,7 +648,7 @@ NATIVE.screen.onResize = function( width, height ) {
 		audioBackEnd :     'native',
 		currentLanguage :  GLOBAL.navigator.language,
 		id :               '',
-		libraryUrl :       'resources/library',
+		libraryUrl :       'library',
 		mode :             'deployed',
 		renderingBackEnd : 'canvas-2d',
 		screenSize :       [ width, height ],
@@ -666,8 +666,8 @@ NATIVE.screen.onResize = function( width, height ) {
 
 	// loading engine library and application module
 	NATIVE.eval(
-		NATIVE.getFileSync( 'resources/spelljs/spell.js.mp3' ) + '\n' +
-		NATIVE.getFileSync( 'resources/spelljs/data.js.mp3' )
+		NATIVE.getFileSync( 'spelljs/spell.js.mp3' ) + '\n' +
+		NATIVE.getFileSync( 'spelljs/data.js.mp3' )
 	)
 
 	var engineInstance = GLOBAL.require( 'spell/client/main', config )
