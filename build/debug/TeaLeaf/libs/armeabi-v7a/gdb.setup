@@ -1,0 +1,2 @@
+set solib-search-path ./obj/local/armeabi-v7a
+directory /home/julian/workspace/spellEngine/modules/spellAndroid/modules/android-ndk/linux-ia32/platforms/android-14/arch-arm/usr/include jni /home/julian/workspace/spellEngine/modules/spellAndroid/modules/android-ndk/linux-ia32/sources/android/cpufeatures /home/julian/workspace/spellEngine/modules/spellAndroid/modules/android-ndk/linux-ia32/sources/cxx-stl/system jni/deps jni/core jni/core/deps jni/deps/v8 /home/julian/workspace/spellEngine/modules/spellAndroid/modules/android-ndk/linux-ia32/sources/cxx-stl/system/include
