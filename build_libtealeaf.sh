@@ -21,8 +21,15 @@ fi
 export JAVA_HOME=$PWD/modules/jdk/$ARCH
 export PATH=$PATH:$PWD/modules/android-sdk/$ARCH/platform-tools:$PWD/modules/android-sdk/$ARCH/tools:$PWD/modules/android-ndk/$ARCH
 
+#symlink our own native-core repository
+ln -sf ../../../native-core modules/native-android/TeaLeaf/jni/core
+
 cd modules/native-android
-make setup
+
+android update project -p TeaLeaf --target android-15 --subprojects
+android update project -p GCTestApp --target android-15 --subprojects
+#node plugins/updatePlugins.js
+
 make clean
 
 cd TeaLeaf
