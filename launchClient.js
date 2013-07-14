@@ -1,6 +1,5 @@
 function jsio() {
 	//this function is called when the runtime starts excecuting javascript
-	
 }
 
 var EVENT_HANDLER = {},
@@ -103,7 +102,7 @@ NATIVE.doneLoading();
 
         this.save = function() {
             if (this._stack.length <= this._stackPos) {
-                logger.log('expanding stack');
+                //logger.log('expanding stack');
                 this._stack.push({});
             }
             this.updateState(this, this._stack[this._stackPos++]);
@@ -373,7 +372,7 @@ NATIVE.doneLoading();
             logURL = '<base64>';
         }
 
-        logger.debug('imageLoaded:', logURL, evt.originalWidth + 'x' + evt.originalHeight, '(' + evt.width + 'x' + evt.height + ')');
+        //logger.debug('imageLoaded:', logURL, evt.originalWidth + 'x' + evt.originalHeight, '(' + evt.width + 'x' + evt.height + ')');
 
         var images = loadingImages[evt.url];
         delete loadingImages[evt.url];
@@ -427,7 +426,7 @@ var Image = function() {
 
         this.__defineSetter__('src', function(value) {
             if (!value) {
-                logger.error('empty src set on an image!');
+                //logger.error('empty src set on an image!');
                 //this._onerror();
                 return;
             }
@@ -522,7 +521,7 @@ GLOBAL.Image = Image;
             this.status = 0;
 
             if (!this._async) {
-                logger.warn("synchronous xhrs not supported");
+                //logger.warn("synchronous xhrs not supported");
             }
         }
 
@@ -605,7 +604,7 @@ GLOBAL.localStorage = {
 		NATIVE.localStorage.clear()
 	},
 	key : function() {
-		logger.log( 'ERROR: localStorage.key() unimplemented' )
+		//logger.log( 'ERROR: localStorage.key() unimplemented' )
 
 		return null
 	}
