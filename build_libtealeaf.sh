@@ -4,10 +4,11 @@ MODE=RELEASE
 UNAME=$(uname -sm)
 
 if [ "$UNAME" = "Linux i386" ]; then
-	ARCH="linux-ia32"
+	echo "Your arch is not supported!"
+	exit 1
 
 elif [ "$UNAME" = "Linux x86_64" ]; then
-	ARCH="linux-ia32"
+	ARCH="linux-x64"
 
 elif [ "$UNAME" = "Darwin x86_64" ]; then
 	ARCH="osx-x64"
@@ -40,11 +41,13 @@ if [ "$MODE" = "RELEASE" ]; then
 	echo "Creating RELEASE build..."
 
 	ndk-build -j 8 RELEASE=1
+	# APP_ABI="armeabi armeabi-v7a"
 	ant release
 else
 	echo "Creating DEBUG build..."
 	
 	ndk-build -j 8 DEBUG=1
+	#APP_ABI="armeabi armeabi-v7a"
 	ant debug 
 fi
 
