@@ -1,15 +1,6 @@
-[submodule "modules/native-android"]
-	path = modules/native-android
-	url = ssh://git@stash.spielmeister.com:7999/SPELLANDROID/native-android.git
-[submodule "modules/android-ndk"]
-	path = modules/android-ndk
-	url = ssh://git@stash.spielmeister.com:7999/SPELLANDROID/android-ndk.git
 [submodule "modules/android-sdk"]
 	path = modules/android-sdk
 	url = ssh://git@stash.spielmeister.com:7999/SPELLANDROID/android-sdk.git
 [submodule "modules/jdk"]
 	path = modules/jdk
 	url = ssh://git@stash.spielmeister.com:7999/SPELLCOMMON/jdk.git
-[submodule "modules/native-core"]
-	path = modules/native-core
-	url = ssh://git@stash.spielmeister.com:7999/SPELLCOMMON/native-core.git
