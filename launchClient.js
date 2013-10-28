@@ -16,12 +16,9 @@ GLOBAL.console = NATIVE.console
 NATIVE.doneLoading();
 
 //<CONTEXT2D>
-    var createdOnscreenCanvas = false,
-        __globalScissor = false;
+    var createdOnscreenCanvas = false
 
     var Context2D = function(opts) {
-        this._stack = [];
-        this._stackPos = 0;
         this.canvas = opts.canvas;
 
 
@@ -38,32 +35,6 @@ NATIVE.doneLoading();
         console.log('Creating 2d context with ' + this.canvas._width + 'x' + this.canvas._height );
 
         this._ctx = new NATIVE.gl.Context2D(this.canvas, this.canvas._src, this.canvas.__gl_name);
-
-        //FIXME add globalalpha back to these
-        this.updateState = function(src, dest) {
-            /*
-             obj.stroke = this.stroke;
-             obj.patternQuality = this.patternQuality;
-             obj.fillPattern = this.fillPattern;
-             obj.strokePattern = this.strokePattern;
-             */
-            dest.font = src.font;
-            dest.textAlign = src.textAlign;
-            dest.textBaseline = src.textBaseline;
-            dest.fillStyle = src.fillStyle;
-            dest.strokeStyle = src.strokeStyle;
-            /*
-             obj.shadow = this.shadow;
-             obj.shadowBlur = this.shadowBlur;
-             obj.shadowOffsetX = this.shadowOffsetX;
-             obj.shadowOffsetY = this.shadowOffsetY;
-             */
-            return dest;
-        };
-
-        for (var i = 0; i < 64; i++) {
-            this._stack[i] = this.updateState(this, {});
-        }
 
         this.getNativeCtx = function () { return this._ctx; }
 
@@ -101,17 +72,11 @@ NATIVE.doneLoading();
         };
 
         this.save = function() {
-            if (this._stack.length <= this._stackPos) {
-                //logger.log('expanding stack');
-                this._stack.push({});
-            }
-            this.updateState(this, this._stack[this._stackPos++]);
             this._ctx.save();
         };
 
         this.restore = function() {
             this._ctx.restore();
-            this.updateState(this._stack[this._stackPos--], this);
         };
 
         this.drawImage = function(img, x1, y1, w1, h1, x2, y2, w2, h2) {
@@ -175,14 +140,12 @@ NATIVE.doneLoading();
         this.transform = function(a, b, c, d, e, f) {
             var n = arguments.length;
 
-            if (n != 6) {
+            if( n != 6 ) {
                 console.log("Wrong tranform call with " + n + " parameters");
                 return;
-
             }
 
             this._ctx.transform(a, b, c, d, e, f);
-
         }
 
         this.clearRect = function(x, y, width, height) {
