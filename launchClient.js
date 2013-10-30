@@ -63,7 +63,7 @@ NATIVE.doneLoading();
             this._ctx.clear();
         };
 
-        this.swap = function(operations) {
+        this.flush = function() {
             NATIVE.gl.flushImages();
         };
 
