@@ -289,25 +289,28 @@ NATIVE.doneLoading();
 //</CANVAS>
 
 //<EVENTHANDLER>
-    handlers = {};
+    handlers = {}
 
-    NATIVE.events = {};
-    NATIVE.events.registerHandler = function(name, handler) {
-        handlers[name] = handler;
-    }
+    NATIVE.events = {
+		registerHandler : function( name, handler ) {
+			handlers[ name ] = handler
+		},
+		unregisterHandler : function( name ) {
+			delete handlers[ name ]
+		},
+		dispatchEvent : function( event ) {
+			var e = event
 
-    NATIVE.events.dispatchEvent = function(evt) {
-        var e = evt;
-        if (typeof e == 'string') {
-            e = JSON.parse(e);
-        }
+			if( typeof e == 'string' ) {
+				e = JSON.parse( e )
+			}
 
-        var handler = handlers[e.name];
-        if (handler) {
-            handler(e);
-        }
-    }
-
+			var handler = handlers[ e.name ]
+			if( handler ) {
+				handler( e )
+			}
+		}
+	}
 
 //</EVENTHANDLER>
 
