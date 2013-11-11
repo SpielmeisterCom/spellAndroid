@@ -1,24 +1,31 @@
-.PHONY: all 
-all: 
-	rm -rf build || true
+DEFAULT: all
+BUILD_DIR_RELEASE	= build/release
+BUILD_DIR_DEBUG		= build/debug
 
-	# building release version of libtealeaf
-	mkdir -p build/release
-
-	./build_libtealeaf.sh
-
-	cp -aRL modules/native-android/TeaLeaf build/release
-	rm -rf build/release/TeaLeaf/jni/core/.git
-
-	# building debug version of libtealeaf
-	mkdir -p build/debug
-
+.PHONY: debug
+debug:
+	rm -Rf $(BUILD_DIR_DEBUG) || true
+	mkdir -p $(BUILD_DIR_DEBUG)
+	
 	./build_libtealeaf.sh debug
 
-	cp -aRL modules/native-android/TeaLeaf build/debug
-	rm -rf build/debug/TeaLeaf/jni/core/.git
+	cp -aRL modules/native-android/TeaLeaf $(BUILD_DIR_DEBUG) 
+	rm -rf $(BUILD_DIR_DEBUG)/TeaLeaf/jni/core/.git
 
+.PHONY: release
+release:
+	rm -Rf $(BUILD_DIR_RELEASE) || true
+	mkdir -p $(BUILD_DIR_RELEASE)
+	
+	./build_libtealeaf.sh
+	
+	cp -aRL modules/native-android/TeaLeaf $(BUILD_DIR_RELEASE) 
+	rm -rf $(BUILD_DIR_RELEASE)/TeaLeaf/jni/core/.git
+
+.PHONY: aux
+aux:
 	cp modules/native-android/AndroidManifest.xsl build
 	cp launchClient.js build
 
-
+.PHONY: all 
+all: debug release aux
