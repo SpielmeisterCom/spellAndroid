@@ -36,8 +36,10 @@ if [ ! -d /opt/android-sdk ]; then
 fi
 
 #path to javac
-if [ -x "$JAVA_HOME" ]; then
-	echo Please set your JAVA_HOME variable to a JDK	
+
+if [ ! -x "$JAVA_HOME"/bin/java -o ! -x "$JAVA_HOME"/bin/javac ]; then 
+	echo "The JAVA_HOME environment variable is not defined correctly"
+	echo "Please set your JAVA_HOME variable to a valid JDK"	
 	exit 1
 fi
 
