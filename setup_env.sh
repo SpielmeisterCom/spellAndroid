@@ -36,7 +36,11 @@ if [ ! -d /opt/android-sdk ]; then
 fi
 
 #path to javac
-export JAVA_HOME=$PWD/modules/jdk/$ARCH
+if [ -x "$JAVA_HOME" ]; then
+	echo Please set your JAVA_HOME variable to a JDK	
+	exit 1
+fi
+
 export PATH=$PATH:$SDK_ROOT/platform-tools:$SDK_ROOT/tools:$NDK_ROOT
 
 echo Enviroment setup:
