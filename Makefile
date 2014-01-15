@@ -17,7 +17,8 @@ debug: prepare
 	
 	#copy native-android and native-core into one location
 	cp -aR modules/native-android/TeaLeaf $(BUILD_DIR_DEBUG)
-	mkdir $(BUILD_DIR_DEBUG)/TeaLeaf/jni/core
+	rm -rf $(BUILD_DIR_DEBUG)/TeaLeaf/jni/core || true
+	mkdir -p $(BUILD_DIR_DEBUG)/TeaLeaf/jni/core || true
 	cp -aR modules/native-core/* $(BUILD_DIR_DEBUG)/TeaLeaf/jni/core
 
 	. ./setup_env.sh && \
@@ -33,7 +34,8 @@ release: prepare
 	
 	#copy native-android and native-core into one location
 	cp -aR modules/native-android/TeaLeaf $(BUILD_DIR_RELEASE)
-	mkdir $(BUILD_DIR_RELEASE)/TeaLeaf/jni/core
+	rm -rf $(BUILD_DIR_RELEASE)/TeaLeaf/jni/core || true
+	mkdir -p $(BUILD_DIR_RELEASE)/TeaLeaf/jni/core || true
 	cp -aR modules/native-core/* $(BUILD_DIR_RELEASE)/TeaLeaf/jni/core
 	
 	cp -aRL modules/native-android/TeaLeaf $(BUILD_DIR_RELEASE) 
