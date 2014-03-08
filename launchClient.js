@@ -542,9 +542,14 @@ GLOBAL.Image = Image;
 
 //</XMLHttpRequest>
 
-//pretend that we support HTML5 Pointer API
-GLOBAL.navigator.pointerEnabled = true;
-GLOBAL.navigator.maxTouchPoints = 2;
+///
+var deviceInfo = JSON.parse( NATIVE.device.native_info )
+if( !deviceInfo.model || deviceInfo.model != 'OUYA Console' ) {
+	//pretend that we support HTML5 Pointer API
+	GLOBAL.navigator.pointerEnabled = true;
+	GLOBAL.navigator.maxTouchPoints = 2;
+}
+///
 
 GLOBAL.addEventListener = function(evtName) {
     console.log('TODO: implement evtHandler for window ' + evtName);
