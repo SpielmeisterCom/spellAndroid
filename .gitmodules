@@ -1,6 +1,6 @@
 [submodule "modules/native-core"]
 	path = modules/native-core
-	url = ssh://git@stash.spielmeister.com:7999/spellcommon/native-core.git
+	url = https://github.com/Spielmeister/native-core.git
 [submodule "modules/native-android"]
 	path = modules/native-android
-	url = ssh://git@stash.spielmeister.com:7999/spellandroid/native-android.git
+	url = https://github.com/Spielmeister/native-android.git
